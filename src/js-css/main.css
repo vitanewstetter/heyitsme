@@ -1,0 +1,47 @@
+/*
+
+colors:
+
+Dark Gray: #606169
+Blue: #60A8FF
+Light Gray: #E8EAF4
+
+*/
+body{
+  padding: 0;
+  margin: 0;
+}
+
+.general-style{
+  border-radius: 8px;
+  box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.1);
+}
+
+#app{
+  width: 100vw;
+  height: 100vh;
+  background-color: #60A8FF;
+  position: absolute;
+}
+
+#body-container{
+  width: 1120px;
+  height: 100vh;
+  margin: 0px auto;
+}
+
+#browse-container{
+  background-color: white;
+  width: 600px;
+  margin: 40px;
+  height: calc(100% - 80px);
+  display: inline-block;
+}
+
+#content-container{
+  background-color: red;
+  width: 400px;
+  height: calc(100% - 80px);
+  margin: 40px 40px 40px 0px;
+  display: inline-block;
+}
