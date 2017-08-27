@@ -5,11 +5,29 @@ colors:
 Dark Gray: #606169
 Blue: #60A8FF
 Light Gray: #E8EAF4
+Dark Blue: #518ED6
 
 */
+
+@font-face{
+  font-family: p-semi;
+  src: url(fonts/Proxima-Nova-Semibold.otf);
+}
+@font-face{
+  font-family: p-reg;
+  src: url(fonts/Proxima-Nova-Regular.otf);
+}
+@font-face{
+  font-family: p-bold;
+  src: url(fonts/Proxima-Nova-Bold.otf);
+}
+
 body{
   padding: 0;
   margin: 0;
+  font-family: p-reg, sans-serif;
+  letter-spacing: 0.5px;
+  line-height: 103%;
 }
 
 .general-style{
@@ -39,9 +57,136 @@ body{
 }
 
 #content-container{
-  background-color: red;
   width: 400px;
   height: calc(100% - 80px);
   margin: 40px 40px 40px 0px;
   display: inline-block;
+  position: absolute;
+}
+
+#main-logo{
+  position: relative;
+  margin-top: 80px;
+  margin-bottom: 8px;
+  display: inline;
+  width: 80px;
+}
+
+#about-subheader{
+  position: relative;
+  color: white;
+  text-align: left;
+}
+
+.about-rule{
+  border-bottom: 3px solid white;
+  width: 88px;
+  margin: 24px 0;
+}
+
+#about-subheader h3{
+  text-transform: uppercase;
+  font-size: 20px;
+  font-family: p-semi, sans-serif;
+  margin-bottom: 8px;
+}
+#about-subheader p{
+  font-size: 14px;
+  margin: 0;
+}
+
+#mini-player{
+  margin: 16px 0;
+  position: relative;
+  width: 294px;
+}
+
+#mini-player svg{
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+#mini-player svg :hover{
+  opacity: 0.97;
+}
+
+#mini-player-text{
+  padding-top: 11px;
+  display: inline-block;
+  color: white;
+  margin: auto 0;
+  vertical-align: top;
+}
+
+#mini-player-text h3{
+  margin-bottom: 2px;
+  margin-top: 0;
+  font-size: 20px;
+}
+
+#mini-player-text p{
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+#about-body{
+  color: white;
+  font-size: 11px;
+  text-align: left;
+}
+
+#browse-criteria{
+  width: 152px;
+  height: 100px;
+  position: absolute;
+  margin: 24px;
+  color: #606169;
+}
+#now-playing{
+  border-bottom: 1px solid #E8EAF4;
+}
+#now-playing h2{
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: p-semi, sans-serif;
+  margin: 150px 0 0 0;
+}
+#now-playing-text{
+  display: inline-block;
+  float: right;
+  width: calc(100% - 48px);
+}
+#now-playing-info h3{
+  font-size: 12px;
+  font-family: p-semi, sans-serif;
+  margin-bottom: 0;
+}
+#now-playing-info h4{
+  font-size: 10px;
+  margin: 0;
+}
+
+#now-playing-info svg{
+  width: 32px;
+}
+
+.big-button{
+  background-color: white;
+  color: #60A8FF;
+  padding: 16px 0px;
+  text-align: center;
+  font-family: p-semi;
+  border-radius: 8px;
+  width: auto;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 48px 0;
+  width: 208px;
+  cursor: pointer;
+}
+.big-button p{
+  margin: 0;
 }

@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-const reducers = combineReducers({
+import songManager from './song-reducer';
 
+const reducers = combineReducers({
+  songManager: songManager
 })
 
 export default reducers;
