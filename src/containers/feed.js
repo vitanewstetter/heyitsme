@@ -24,6 +24,7 @@ var feed_items = [];
 var fillFeed = function(){
   for (var i=1; i <= Object.keys(voicemails).length; i++){
     feed_items.push(<FeedItem
+      key = { voicemails["vm_" + i].id }
       id = { voicemails["vm_" + i].id }
       title = { voicemails["vm_" + i].title }
       name = { voicemails["vm_" + i].name }

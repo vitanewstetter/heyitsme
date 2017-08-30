@@ -31,6 +31,7 @@ body{
   letter-spacing: 0.5px;
   line-height: 103%;
   overflow: hidden;
+  color: #606169;
 }
 
 .general-style{
@@ -192,14 +193,48 @@ body{
   width: 32px;
 }
 #browse-criteria input{
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  padding: 8px 8px;
+  border-radius: 4px;
+  border: 1px solid #E8EAF4;
+}
+input:focus{
+  outline: none;
 }
 #browse-criteria label{
   margin-left: 8px;
   font-size: 11px;
   vertical-align: middle;
 }
+#selected-tags{
+  border-bottom: 1px solid #E8EAF4;
+  border-top: 1px solid #E8EAF4;
+  padding: 4px 0px;
+}
 
+.selected-tag{
+  font-size: 10px;
+  background-color: #E8EAF4;
+  border-radius: 4px;
+  padding: 6px 12px;
+  display: inline-block;
+  margin: 4px;
+}
+.selected-tag p{
+  margin: 0;
+  display: inline-block;
+  line-height: 14px;
+  vertical-align: middle;
+}
+
+.selected-tag svg{
+  display: inline-block;
+  line-height: 14px;
+  vertical-align: middle;
+  margin-left: 8px;
+  width: 8px;
+  height: 8px;
+}
 #feed{
   width: 360px;
   height: calc(100% - 48px);
