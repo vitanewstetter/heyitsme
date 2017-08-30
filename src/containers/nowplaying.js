@@ -5,12 +5,6 @@ import store from '../store';
 
 import Play from '../components/play';
 import voicemails from '../sample';
-// class SongInfo extends React.Component {
-//   render(){
-//     return <div id="now-playing-info">
-//     </div>
-//   }
-// }
 
 
 
@@ -29,15 +23,11 @@ export default class NowPlaying extends React.Component {
             icon="#60A8FF"
             circle="#FFFFFF"
             stroke="#60A8FF"
-            id="41"
+            id={this.props.id}
           />
           <div id="now-playing-text">
-            <h3>{
-              this.getInfo().name
-            }</h3>
-            <h4>{
-              this.getInfo().title
-            }</h4>
+            <h3>{ this.getInfo().name }</h3>
+            <h4>{ this.getInfo().title }</h4>
           </div>
         </div>
       </div>

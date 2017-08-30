@@ -8,7 +8,9 @@ Light Gray: #E8EAF4
 Dark Blue: #518ED6
 
 */
-
+::-webkit-scrollbar {
+    display: none;
+}
 @font-face{
   font-family: p-semi;
   src: url(fonts/Proxima-Nova-Semibold.otf);
@@ -28,11 +30,23 @@ body{
   font-family: p-reg, sans-serif;
   letter-spacing: 0.5px;
   line-height: 103%;
+  overflow: hidden;
 }
 
 .general-style{
   border-radius: 8px;
   box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.1);
+}
+
+.play_button, .pause_button{
+  cursor: pointer;
+}
+.play_button :hover{
+  opacity: 0.95;
+}
+
+.pause_button :hover{
+  opacity: 0.95;
 }
 
 #app{
@@ -54,6 +68,7 @@ body{
   margin: 40px;
   height: calc(100% - 80px);
   display: inline-block;
+  overflow: scroll;
 }
 
 #content-container{
@@ -144,20 +159,24 @@ body{
   position: absolute;
   margin: 24px;
   color: #606169;
+  margin-top: 150px;
 }
 #now-playing{
   border-bottom: 1px solid #E8EAF4;
+  margin-bottom: 16px;
+  padding: 2% 0;
 }
 #now-playing h2{
   text-transform: uppercase;
   font-size: 12px;
   font-family: p-semi, sans-serif;
-  margin: 150px 0 0 0;
+  margin: 0;
 }
 #now-playing-text{
   display: inline-block;
   float: right;
   width: calc(100% - 48px);
+  padding: 1% 0;
 }
 #now-playing-info h3{
   font-size: 12px;
@@ -172,7 +191,56 @@ body{
 #now-playing-info svg{
   width: 32px;
 }
+#browse-criteria input{
+  margin-bottom: 8px;
+}
+#browse-criteria label{
+  margin-left: 8px;
+  font-size: 11px;
+  vertical-align: middle;
+}
 
+#feed{
+  width: 360px;
+  height: calc(100% - 48px);
+  margin: 24px 24px 24px 16px;
+  float: right;
+}
+
+.feed-item{
+  width: 100%;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #E8EAF4;
+  color: #606169;
+  padding-bottom: 16px;
+}
+.feed-item svg{
+  width: 32px;
+  height: 32px;
+}
+.feed-item-titles{
+  display: inline-block;
+  margin-left: 16px;
+  width: 180px;
+}
+.feed-item h2{
+  font-size: 14px;
+  font-family: p-semi, sans-serif;
+  line-height: 22px;
+  margin: 0;
+}
+.feed-item h3{
+  font-size: 11px;
+  margin: 0;
+}
+.feed-item-date{
+  float: right;
+}
+.feed-item-date p{
+  font-size: 10px;
+  line-height: 16px;
+  margin: 0;
+}
 .big-button{
   background-color: white;
   color: #60A8FF;

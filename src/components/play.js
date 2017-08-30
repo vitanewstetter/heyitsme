@@ -2,17 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import store from '../store';
-
-//makes the spacing right for the div holding the icon svg
-var divStyle = {
-  display: "inline-block"
-}
+import Sound from '../js-css/sound-loader';
+import { context, buffer } from '../js-css/audio';
 //play and pause component
 class Play extends React.Component {
   //function contained in component that controls what
   //happens when you click on a play button
   playAudio(){
-    console.log('play');
     //send dispatch to the store telling it that we are
     //playing a new song. if it's the same song, it will
     //start where it left off.
@@ -27,7 +23,6 @@ class Play extends React.Component {
   //function contained in component that controls what
   //happens when you click on a pause button
   pauseAudio(){
-    console.log('pause');
     store.dispatch({
       type: 'PAUSE_SONG',
       id: this.id
@@ -36,22 +31,16 @@ class Play extends React.Component {
   }
   render(){
     if(store.getState().songManager.playing && store.getState().songManager.song === this.props.id){
-      return <div style={divStyle}>
-        <svg onClick={(e) => this.pauseAudio(e)} id={this.props.id} className="pause_button" width="80px" height="80px" viewBox="-8 -8 96 96" version="1.1">
+      return <svg onClick={(e) => this.pauseAudio(e)} id={this.props.id} className="pause_button" width="80px" height="80px" viewBox="-8 -8 96 96" version="1.1">
           <g id="Pause"  stroke={this.props.stroke} fillRule="evenodd" >
               <ellipse id="Oval" fill={this.props.circle} cx="40" cy="40" rx="40" ry="40" stroke={this.props.stroke} strokeWidth="8" ></ellipse>
               <path d="M30,24.8422713 L30,54.6529968" id="Path-3" stroke={this.props.icon} strokeLinecap="round" strokeWidth="8"></path>
               <path stroke={this.props.icon} strokeWidth="8" d="M50,24.8422713 L50,54.6529968" id="Path-3-Copy" strokeLinecap="round"></path>
           </g>
         </svg>
-        <audio id={"vm_" + this.props.id}>
-          <source src={"/audio-files/voicemail-" + this.props.id + ".m4a"}/>
-        </audio>
-      </div>
     }
     else{
-      return <div style={divStyle}>
-          <svg onClick={(e) => this.playAudio(e)} id={this.props.id} className="play_button" width="80px" height="80px" viewBox="-8 -8 96 96" version="1.1">
+      return <svg onClick={(e) => this.playAudio(e)} id={this.props.id} className="play_button" width="80px" height="80px" viewBox="-8 -8 96 96" version="1.1">
           <g id="v4" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g id="Home" transform="translate(-1081.000000, -499.000000)">
                   <g id="Info" transform="translate(1000.000000, 355.000000)">
@@ -65,20 +54,26 @@ class Play extends React.Component {
               </g>
           </g>
           </svg>
-          <audio id={"vm_" + this.props.id}>
-            <source src={"/audio-files/voicemail-" + this.props.id + ".m4a"}/>
-          </audio>
-        </div>
     }
   }
 }
 
+var current = new Sound(context, null, null);
 var songPlaying = function(){
-  var current = document.getElementById("vm_" + store.getState().songManager.song);
+
   if (store.getState().songManager.playing){
-    current.play();
+    if (current.id !== store.getState().songManager.song){
+      if(current.id !== null){
+        current.stop();
+      }
+      current = new Sound(context, buffer.getSoundByIndex(store.getState().songManager.song), store.getState().songManager.song);
+      current.play();
+    }
+    else{
+      current.unPause();
+    }
   }
-  else if (!store.getState().songManager.playing){
+  else {
     current.pause();
   }
 };
