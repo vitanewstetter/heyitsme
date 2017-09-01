@@ -4,39 +4,50 @@ import axios from 'axios';
 import FeedItem from '../components/feed-item';
 import voicemails from '../sample';
 
-var url = "http://localhost:8080/api/voicemails"
+
 
 class Feed extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      feed: [],
+    };
+  }
+
+  fillFeed(){
+    axios.get(this.props.url).then(res => {
+      this.setState({ data: res.data });
+
+      var data = this.state.data;
+      var feed_items = [];
+
+      for (var i=0; i < data.length; i++){
+        feed_items.push(<FeedItem
+          key = { data[i]._id}
+          id = { data[i]._id }
+          title = { data[i].title }
+          name = { data[i].name }
+          time = { data[i].time }
+          date = { data[i].date }
+        />)
+      }
+      this.setState({ feed: feed_items });
+    });
+  }
+
   componentWillMount(){
-    fillFeed();
+    this.fillFeed();
   }
   componentWillReceiveProps(){
-    fillFeed();
+    this.fillFeed();
   }
   render(){
     return <div id='feed'>
-      {feed_items}
+      {this.state.feed}
     </div>
   }
 }
 
 export default Feed
-
-var feed_items = [];
-
-var fillFeed = function(){
-  axios.get(this.props.url).then(res => {
-    console.log(res.data);
-  });
-
-  for (var i=1; i <= Object.keys(voicemails).length; i++){
-    feed_items.push(<FeedItem
-      key = { voicemails["vm_" + i].id }
-      id = { voicemails["vm_" + i].id }
-      title = { voicemails["vm_" + i].title }
-      name = { voicemails["vm_" + i].name }
-      time = { voicemails["vm_" + i].time }
-      date = { voicemails["vm_" + i].date }
-    />)
-  }
-}

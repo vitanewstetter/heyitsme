@@ -3,6 +3,7 @@
 var express = require('express'),
     assert = require('assert'),
     fs = require('fs'),
+    cors = require("cors"),
     MongoClient = require("mongodb").MongoClient;
 
 var app = express();
@@ -34,7 +35,21 @@ MongoClient.connect(url, function(err, database) {
 });
 app.use(express.static("../build/"));
 
+app.use(function(req, res, next) {
+ res.setHeader('Access-Control-Allow-Origin', ''*'');
+ res.setHeader('Access-Control-Allow-Credentials', 'true');
+ res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+ res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+
+ //and remove cacheing so we get the most recent comments
+ res.setHeader('Cache-Control', 'no-cache');
+ next();
+});
+
 app.get("/api/voicemails", function(req, res){
+    //UNCOMMENT BELOW TO CLEAR DB
+    //db.collection('cards').remove({});
+
     console.log(req.method);
     console.log(__dirname);
 
@@ -45,11 +60,11 @@ app.get("/api/voicemails", function(req, res){
         });
 
     // db.collection('voicemails').insert( {
-    //   _id: 1,
-    //   title: "My mom calling to say 'hi honey'",
-    //   "name": "Donna DeMatteo",
-    //   "date": "12/7/2016",
-    //   "time": "4:25s",
+    //   _id: 2,
+    //   title: "Testy Test!!",
+    //   "name": "Me",
+    //   "date": "12/4/2016",
+    //   "time": "8:25s",
     //   "tags": [
     //     "butt dial",
     //     "quick",
@@ -58,13 +73,6 @@ app.get("/api/voicemails", function(req, res){
     //   "butt": false,
     //   "drunk": false
     // });
-    // fs.writeFile('message.txt', 'Hello Node.js', (err) => {
-    //   if (err){
-    //           console.log(err);
-    //       }else{
-    //           console.log("saved image");
-    //       }
-    //   });
 });
 
 
