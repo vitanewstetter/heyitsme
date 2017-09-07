@@ -2,9 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 import FeedItem from '../components/feed-item';
-import voicemails from '../sample';
-
-
 
 class Feed extends React.Component {
 

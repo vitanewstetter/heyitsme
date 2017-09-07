@@ -38,6 +38,9 @@ body{
   border-radius: 8px;
   box-shadow: 2px 2px 20px 2px rgba(0,0,0,0.1);
 }
+input, textarea:focus{
+  outline: none;
+}
 
 .play_button, .pause_button{
   cursor: pointer;
@@ -45,7 +48,6 @@ body{
 .play_button :hover{
   opacity: 0.95;
 }
-
 .pause_button :hover{
   opacity: 0.95;
 }
@@ -56,13 +58,11 @@ body{
   background-color: #60A8FF;
   position: absolute;
 }
-
 #body-container{
   width: 1120px;
   height: 100vh;
   margin: 0px auto;
 }
-
 #browse-container{
   background-color: white;
   width: 600px;
@@ -71,7 +71,6 @@ body{
   display: inline-block;
   overflow: scroll;
 }
-
 #content-container{
   width: 400px;
   height: calc(100% - 80px);
@@ -79,15 +78,13 @@ body{
   display: inline-block;
   position: absolute;
 }
-
 #main-logo{
   position: relative;
-  margin-top: 80px;
+  margin-top: 36px;
   margin-bottom: 8px;
   display: inline;
   width: 80px;
 }
-
 #about-subheader{
   position: relative;
   color: white;
@@ -95,7 +92,7 @@ body{
 }
 
 .about-rule{
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #518ED6;
   width: 88px;
   margin: 24px 0;
 }
@@ -110,13 +107,11 @@ body{
   font-size: 14px;
   margin: 0;
 }
-
 #mini-player{
   margin: 16px 0;
   position: relative;
   width: 294px;
 }
-
 #mini-player svg{
   width: 64px;
   height: 64px;
@@ -124,11 +119,9 @@ body{
   display: inline-block;
   margin-right: 8px;
 }
-
 #mini-player svg :hover{
   opacity: 0.97;
 }
-
 #mini-player-text{
   padding-top: 11px;
   display: inline-block;
@@ -136,13 +129,11 @@ body{
   margin: auto 0;
   vertical-align: top;
 }
-
 #mini-player-text h3{
   margin-bottom: 2px;
   margin-top: 0;
   font-size: 20px;
 }
-
 #mini-player-text p{
   margin-top: 8px;
   font-size: 14px;
@@ -154,14 +145,32 @@ body{
   text-align: left;
 }
 
-#browse-criteria{
-  width: 152px;
-  height: 100px;
-  position: absolute;
-  margin: 24px;
-  color: #606169;
-  margin-top: 150px;
+#upload-input input{
+  background-color: transparent;
+  color: white;
+  padding: 0px 8px 2px 8px;
+  border: none;
+  border-bottom: solid 2px #518ED6;
+  transition: all ease 0.3s;
+  font-size: 13px;
+  display: inline-block;
+  margin: 0 4px;
+  font-family: p-reg, sans-serif;
 }
+.narrow-input{
+  width: 72px;
+}
+.wide-input{
+  width: 220px;
+}
+
+.upload-body-text{
+  color: white;
+  font-size: 12px;
+  display: inline-block;
+  line-height: 44px;
+}
+
 #now-playing{
   border-bottom: 1px solid #E8EAF4;
   margin-bottom: 16px;
@@ -188,18 +197,23 @@ body{
   font-size: 10px;
   margin: 0;
 }
-
 #now-playing-info svg{
   width: 32px;
+}
+
+#browse-criteria{
+  width: 152px;
+  height: 100px;
+  position: absolute;
+  margin: 24px;
+  color: #606169;
+  margin-top: 150px;
 }
 #browse-criteria input{
   margin-bottom: 16px;
   padding: 8px 8px;
   border-radius: 4px;
   border: 1px solid #E8EAF4;
-}
-input:focus{
-  outline: none;
 }
 #browse-criteria label{
   margin-left: 8px;
@@ -211,7 +225,6 @@ input:focus{
   border-top: 1px solid #E8EAF4;
   padding: 4px 0px;
 }
-
 .selected-tag{
   font-size: 10px;
   background-color: #E8EAF4;
@@ -226,7 +239,6 @@ input:focus{
   line-height: 14px;
   vertical-align: middle;
 }
-
 .selected-tag svg{
   display: inline-block;
   line-height: 14px;
@@ -235,13 +247,13 @@ input:focus{
   width: 8px;
   height: 8px;
 }
+
 #feed{
   width: 360px;
   height: calc(100% - 48px);
   margin: 24px 24px 24px 16px;
   float: right;
 }
-
 .feed-item{
   width: 100%;
   margin-bottom: 16px;
@@ -276,6 +288,7 @@ input:focus{
   line-height: 16px;
   margin: 0;
 }
+
 .big-button{
   background-color: white;
   color: #60A8FF;
@@ -286,10 +299,34 @@ input:focus{
   width: auto;
   text-transform: uppercase;
   display: inline-block;
-  margin: 48px 0;
+  margin: 36px 0;
   width: 208px;
   cursor: pointer;
 }
+.big-button:hover{
+  opacity: 0.85;
+}
 .big-button p{
+  margin: 0;
+}
+
+.little-button{
+  background-color: #518ED6;
+  color: white;
+  padding: 16px 0px;
+  text-align: center;
+  font-family: p-semi;
+  border-radius: 8px;
+  width: auto;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 24px 0 16px 0;
+  width: 160px;
+  cursor: pointer;
+}
+.little-button:hover{
+  opacity: 0.85;
+}
+.little-button p{
   margin: 0;
 }
