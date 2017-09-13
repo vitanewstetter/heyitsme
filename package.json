@@ -5,11 +5,16 @@
   "dependencies": {
     "axios": "^0.16.2",
     "express": "^4.15.4",
+    "express-formidable": "^1.0.0",
     "mongodb": "^2.2.31",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "shortid": "^2.2.8",
+    "socket.io": "^2.0.3",
+    "socket.io-file": "^2.0.14",
+    "socket.io-file-client": "^2.0.121"
   },
   "devDependencies": {
     "react-scripts": "1.0.10"

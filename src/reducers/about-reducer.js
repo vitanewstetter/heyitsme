@@ -8,6 +8,8 @@ const about = (state = initialAbout, action) => {
       return Object.assign({}, state, {about: 'about'});
     case "NEXT":
       return Object.assign({}, state, {about: 'next'});
+    case "BACK":
+      return Object.assign({}, state, {about: 'next'});
     case "UPLOAD":
       return Object.assign({}, state, {about: 'upload'});
     default:

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import store from '../store';
 
@@ -7,7 +8,11 @@ import MiniPlayer from './mini-player';
 import BigButton from './big-button';
 import { LittleButton } from './big-button';
 
+import Next from '../containers/next';
+import Upload from '../containers/upload';
+
 class About extends React.Component {
+
   render(){
     if(store.getState().about.about === 'about'){
       return <div id="about-section">
@@ -26,54 +31,23 @@ class About extends React.Component {
         <BigButton
           id="NEXT"
           text="Upload Your Own"
+          width="208px"
         />
       </div>
     }
     else if(store.getState().about.about === 'next'){
-      return <div id="about-section">
-      <LittleButton
-        id="SELECT"
-        text="Select a file"
-      />
-        <form id="upload-input">
-          <p className="upload-body-text">This voicemail was left for me by
-          <input className="upload-text-input" name="upload-name" type="text" maxLength="20"/>
-           and I think if I had to name it, I would call it
-          <input className="upload-text-input" name="upload-name" type="text" maxLength="20"/>
-          because it is
-          <input className="upload-text-input wide-input" name="upload-description" type="text" maxLength="40"/>
-          . Five words I would use to describe it are:
-          <input className="upload-text-input narrow-input" name="upload-tag-one" type="text" maxLength="13"/>,
-          <input className="upload-text-input narrow-input" name="upload-tag-two" type="text" maxLength="13"/>,
-          <input className="upload-text-input narrow-input" name="upload-tag-three" type="text" maxLength="13"/>,
-          <input className="upload-text-input narrow-input" name="upload-tag-four" type="text" maxLength="13"/>,
-          and
-          <input className="upload-text-input narrow-input" name="upload-tag-five" type="text" maxLength="13"/>.
-          <br/>
-          </p>
-          
-        </form>
-        <BigButton
-          id="UPLOAD"
-          text="Next"
-        />
-      </div>
+      return <Next/>
     }
     else if(store.getState().about.about === 'upload'){
-      return <div id="about-section">
-
-        <BigButton
-          id="ABOUT"
-          text="Upload"
-        />
-      </div>
+      return <Upload/>
     }
   }
 }
 
 const mapStateToProps = function(store){
   return {
-    about: store.about.about
+    about: store.about.about,
+    uploadData: store.upload
   }
 }
 export default connect(mapStateToProps)(About);

@@ -16,7 +16,6 @@ export default class Buffer {
       thisBuffer.context
         .decodeAudioData(request.response, function(buffer) {
           thisBuffer.buffer[index] = buffer;
-          //updateProgress(thisBuffer.urls.length);
           if(index === thisBuffer.urls.length-1) {
             thisBuffer.loaded();
           }

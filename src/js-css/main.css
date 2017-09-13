@@ -157,11 +157,43 @@ input, textarea:focus{
   margin: 0 4px;
   font-family: p-reg, sans-serif;
 }
+::-webkit-input-placeholder{
+  color: white;
+  font-family: p-reg, sans-serif;
+}
 .narrow-input{
   width: 72px;
 }
 .wide-input{
   width: 220px;
+}
+
+#fileInput {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+#fileInput + label {
+  background-color: #518ED6;
+  color: white;
+  padding: 16px 0px;
+  text-align: center;
+  font-family: p-semi;
+  border-radius: 8px;
+  width: auto;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 24px 0 16px 0;
+  width: 160px;
+  cursor: pointer;
+}
+
+#fileInput:focus + label,
+#fileInput + label:hover {
+    background-color: #518ED6;
 }
 
 .upload-body-text{
@@ -299,8 +331,7 @@ input, textarea:focus{
   width: auto;
   text-transform: uppercase;
   display: inline-block;
-  margin: 36px 0;
-  width: 208px;
+  margin: 36px 24px 36px 0;
   cursor: pointer;
 }
 .big-button:hover{
