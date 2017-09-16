@@ -47,7 +47,7 @@ class Uploader extends React.Component {
 
   render(){
     return <form id='uploader-form'>
-      <input onChange={this.handleFileUpload} type="file" id="fileInput"/>
+      <input onChange={this.handleFileUpload} type="file" id="fileInput" required/>
       <label htmlFor="fileInput">Select a file</label>
     </form>
   }

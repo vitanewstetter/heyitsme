@@ -19,14 +19,14 @@ class BrowseCriteria extends React.Component {
       <NowPlaying
         id = {store.getState().songManager.song}
       />
-      <form>
-        <input id="butt-dial" type="checkbox"/>
-        <label>Butt Dial</label>
-      </form>
-      <form>
-        <input id="drunk" type="checkbox"/>
-        <label>Drunk Dial</label>
-      </form>
+      // <form>
+      //   <input id="butt-dial" type="checkbox"/>
+      //   <label>Butt Dial</label>
+      // </form>
+      // <form>
+      //   <input id="drunk" type="checkbox"/>
+      //   <label>Drunk Dial</label>
+      // </form>
       <form>
         <input id="tag-input" type="text" placeholder="search by tag"/>
       </form>

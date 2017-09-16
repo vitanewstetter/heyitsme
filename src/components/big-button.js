@@ -7,7 +7,10 @@ import store from '../store';
 class BigButton extends React.Component {
 
   changeAbout(e){
+    var completed;
     if (this.props.upload){
+
+
       var nameVal = document.getElementById('upload-name').value;
       var descriptionVal = document.getElementById('upload-description').value;
 
@@ -38,29 +41,38 @@ class BigButton extends React.Component {
             tag5
           ],
       })
+
+
     }
     else if(this.props.complete){
+        var num;
         axios.post('/complete', {
-          file: store.getState().upload,
-          num: store.getState().num.num
+          file: store.getState().upload
         }).then(function (response) {
           console.log(response);
+          axios.post('/', {
+            num: response.data
+          })
         }).catch(function (error) {
           console.log(error);
         });
-
-        //need to add:
-        //dispatch to change num
-        //load the new file.
-        var newNum = store.getState().num.num +=1;
-        store.dispatch({
-          type: 'ADDVOICEMAIL',
-          num: newNum
-        });
     }
-    store.dispatch({
-      type: this.props.id
-    });
+    var entriesFilled = true;
+    for (const key of Object.keys(store.getState().upload)) {
+        if (store.getState().upload[key]=== null || store.getState().upload[key]===''){
+          entriesFilled = false;
+        }
+    }
+    if (entriesFilled === true){
+      store.dispatch({
+        type: this.props.id
+      });
+    }else{
+      alert("please fill out all the fields");
+      console.log("not completed")
+    }
+
+
 
   }
 

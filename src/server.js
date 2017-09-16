@@ -4,13 +4,13 @@ var express = require('express'),
     assert = require('assert'),
     fs = require('fs'),
     cors = require("cors"),
-    formidable = require('express-formidable'),
     app = express(),
     MongoClient = require("mongodb").MongoClient,
     http = require('http'),
     httpServer = http.Server(app),
     io = require('socket.io').listen(httpServer),
-    SocketIOFile = require('socket.io-file');
+    SocketIOFile = require('socket.io-file'),
+    bodyParser = require('body-parser');
 
 var port = process.env.PORT || 8080;
 
@@ -32,6 +32,8 @@ var findDocuments = function(db, callback) {
     });
 };
 
+var dbEntries = 0;
+
 //START DATABASE!
 MongoClient.connect(url, function(err, database) {
     assert.equal(null, err);
@@ -40,48 +42,59 @@ MongoClient.connect(url, function(err, database) {
 
 });
 app.use(express.static("../build/"));
-app.use(formidable({
-  // uploadDir: '/test',
-  multiples: false
-}));
+app.use(bodyParser.json());
 
-//
-// Access-Control-Allow-Origin stuff
-// app.use(function(req, res, next) {
-//  res.setHeader('Access-Control-Allow-Origin', ''*'');
-//  res.setHeader('Access-Control-Allow-Credentials', 'true');
-//  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-//  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
-//
-//  //and remove cacheing so we get the most recent comments
-//  res.setHeader('Cache-Control', 'no-cache');
-//  next();
-// });
+//Access-Control-Allow-Origin stuff
+app.use(function(req, res, next) {
+ res.setHeader('Access-Control-Allow-Origin', ''*'');
+ res.setHeader('Access-Control-Allow-Credentials', 'true');
+ res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+ res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+
+ //and remove cacheing so we get the most recent comments
+ res.setHeader('Cache-Control', 'no-cache');
+ next();
+});
+
 app.post("/complete", function(req, res){
-
     console.log(req.method);
-    console.log(req.fields.file);
-    console.log(req.fields.num);
-    var file = req.fields.file;
+    console.log(req.body);
 
-    db.collection('voicemails').insert( {
-      _id: req.fields.num,
-      title: file.description,
-      "name": file.name,
-      "date": "fuck",
-      "time": "ugh",
-      "tags": [
-        file.tags[0],
-        file.tags[1],
-        file.tags[2],
-        file.tags[3],
-        file.tags[4]
-      ],
-      "butt": false,
-      "drunk": false
+    var file = req.body.file;
+
+    for (const key of Object.keys(file)) {
+        console.log(key, file[key]);
+        //console.log(file)
+    }
+
+    db.collection('voicemails').count().then((count) => {
+      db.collection('voicemails').insert( {
+        _id: count,
+        title: file.description,
+        "name": file.name,
+        "date": "fuck",
+        "time": "ugh",
+        "tags": [
+          file.tags[0],
+          file.tags[1],
+          file.tags[2],
+          file.tags[3],
+          file.tags[4]
+        ],
+        "butt": false,
+        "drunk": false
+      });
+      return res.json(count);
     });
 
+
 });
+
+app.post('/', function(req, res){
+
+  dbEntries = req.body.num;
+  console.log(dbEntries);
+})
 
 io.on('connection', (socket) => {
 	console.log('Socket connected.');
@@ -103,7 +116,7 @@ io.on('connection', (socket) => {
 			var fname = "vm";	// filename without extension
 			var ext = split[1];
 
-			return `${fname}_${count++}.${ext}`;
+			return `${fname}_${dbEntries+=1}.${ext}`;
 		}
 	});
 	uploader.on('start', (fileInfo) => {
