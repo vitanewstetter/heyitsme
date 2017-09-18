@@ -1,6 +1,7 @@
 import React from 'react';
 
 import store from '../store';
+import { connect } from 'react-redux';
 
 import MiniPlayer from '../components/mini-player';
 
@@ -17,7 +18,8 @@ class Upload extends React.Component{
     </div>
 
     <MiniPlayer
-      id="1"
+      id={store.getState().num.num}
+      current='true'
     />
 
     <BigButton
@@ -35,4 +37,10 @@ class Upload extends React.Component{
   }
 }
 
-export default Upload
+const mapStateToProps = function(store) {
+    return {
+        num: store.num.num
+    };
+};
+
+export default connect(mapStateToProps)(Upload);

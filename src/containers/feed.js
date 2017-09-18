@@ -14,6 +14,7 @@ class Feed extends React.Component {
   }
 
   fillFeed(){
+    console.log("fillfeed called")
     axios.get(this.props.url).then(res => {
       this.setState({ data: res.data });
 
@@ -34,10 +35,11 @@ class Feed extends React.Component {
     });
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.fillFeed();
   }
   componentWillReceiveProps(){
+    console.log("recieving props called")
     this.fillFeed();
   }
   render(){

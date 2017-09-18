@@ -62,10 +62,6 @@ app.post("/complete", function(req, res){
 
     var file = req.body.file;
 
-    for (const key of Object.keys(file)) {
-        console.log(key, file[key]);
-        //console.log(file)
-    }
 
     db.collection('voicemails').count().then((count) => {
       db.collection('voicemails').insert( {
@@ -105,7 +101,7 @@ io.on('connection', (socket) => {
 		// 	music: 'data/music',
 		// 	document: 'data/document'
 		// },
-		uploadDir: '../build/voicemails',							// simple directory
+		uploadDir: '../public/voicemails',							// simple directory
 		// accepts: ['audio/mpeg', 'audio/mp3'],		// chrome and some of browsers checking mp3 as 'audio/mp3', not 'audio/mpeg'
 		// maxFileSize: 4194304, 						// 4 MB. default is undefined(no limit)
 		chunkSize: 10240,							// default is 10240(1KB)
@@ -138,6 +134,14 @@ io.on('connection', (socket) => {
 	});
 });
 
+
+app.get("/api/num", function(req, res){
+  db.collection('voicemails').count().then((count) => {
+    return res.json(count);
+  });
+});
+
+
 //voicemail loading part
 app.get("/api/voicemails", function(req, res){
     //UNCOMMENT BELOW TO CLEAR DB
@@ -151,21 +155,6 @@ app.get("/api/voicemails", function(req, res){
             res.send(docs);
             db.close;
         });
-
-    // db.collection('voicemails').insert( {
-    //   _id: 2,
-    //   title: "Testy Test!!",
-    //   "name": "Me",
-    //   "date": "12/4/2016",
-    //   "time": "8:25s",
-    //   "tags": [
-    //     "butt dial",
-    //     "quick",
-    //     "happy"
-    //   ],
-    //   "butt": false,
-    //   "drunk": false
-    // });
 });
 
 

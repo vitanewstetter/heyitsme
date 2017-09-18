@@ -1,11 +1,25 @@
 import React from 'react';
 import voicemails from '../sample';
 
+import store from '../store';
+import { connect } from 'react-redux';
+
+import Sound from '../js-css/sound-loader';
+import { context, buffer } from '../js-css/audio';
+
 import  Play from './play';
-export default class MiniPlayer extends React.Component {
+class MiniPlayer extends React.Component {
+
+  loadSound(){
+
+  }
   getInfo(){
-      var temp = "vm_" + this.props.id;
-      return voicemails[temp];
+
+      if(this.props.current){
+        return store.getState().upload
+      }
+
+      return voicemails["vm_1"];
   }
 
   render(){
@@ -18,8 +32,16 @@ export default class MiniPlayer extends React.Component {
       />
       <div id="mini-player-text">
         <h3>{ this.getInfo().name }</h3>
-        <p>{ this.getInfo().title }</p>
+        <p>{ this.getInfo().description }</p>
       </div>
     </div>
   }
 }
+
+const mapStateToProps = function(store) {
+    return {
+        uploadData: store.upload.uploadData
+    };
+};
+
+export default connect(mapStateToProps)(MiniPlayer);

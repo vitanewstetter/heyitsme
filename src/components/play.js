@@ -9,6 +9,7 @@ class Play extends React.Component {
   //function contained in component that controls what
   //happens when you click on a play button
   playAudio(){
+    console.log(this.props.id);
     //send dispatch to the store telling it that we are
     //playing a new song. if it's the same song, it will
     //start where it left off.
@@ -16,6 +17,7 @@ class Play extends React.Component {
       type: 'NEW_SONG',
       id: this.props.id
     });
+    console.log(store.getState().songManager.song);
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
     songPlaying();
@@ -60,7 +62,7 @@ class Play extends React.Component {
 
 var current = new Sound(context, null, null);
 var songPlaying = function(){
-
+  console.log(store.getState().songManager.song);
   if (store.getState().songManager.playing){
     if (current.id !== store.getState().songManager.song){
       if(current.id !== null){

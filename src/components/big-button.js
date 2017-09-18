@@ -4,12 +4,21 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import store from '../store';
 
+import Buffer from '../js-css/buffer-loader';
+
 class BigButton extends React.Component {
 
   changeAbout(e){
+
     var completed;
     if (this.props.upload){
-
+      axios.get('/api/num').then(function(response){
+        console.log("num is " + response.data);
+        store.dispatch({
+          type: "ADDVOICEMAIL",
+          num: response.data
+        })
+      })
 
       var nameVal = document.getElementById('upload-name').value;
       var descriptionVal = document.getElementById('upload-description').value;
@@ -42,7 +51,6 @@ class BigButton extends React.Component {
           ],
       })
 
-
     }
     else if(this.props.complete){
         var num;
@@ -50,12 +58,17 @@ class BigButton extends React.Component {
           file: store.getState().upload
         }).then(function (response) {
           console.log(response);
+          // store.dispatch({
+          //   type: "ADDVOICEMAIL",
+          //   num: response.data
+          // })
           axios.post('/', {
             num: response.data
           })
         }).catch(function (error) {
           console.log(error);
         });
+
     }
     var entriesFilled = true;
     for (const key of Object.keys(store.getState().upload)) {
