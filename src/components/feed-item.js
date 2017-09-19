@@ -10,14 +10,11 @@ class FeedItem extends React.Component {
         circle="#FFFFFF"
         stroke="#E8EAF4"
         id={ this.props.id }
+        feed={true}
       />
       <div className="feed-item-titles">
         <h2>{ this.props.name }</h2>
         <h3>{ this.props.title }</h3>
-      </div>
-      <div className="feed-item-date">
-        <p>{ this.props.time }</p>
-        <p>{ this.props.date }</p>
       </div>
     </div>
   }

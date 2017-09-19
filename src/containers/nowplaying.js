@@ -8,10 +8,10 @@ import voicemails from '../sample';
 
 
 
-export default class NowPlaying extends React.Component {
+class NowPlaying extends React.Component {
   getInfo(){
-      var temp = "vm_" + this.props.id;
-      return voicemails[temp];
+      var current = store.getState().songManager
+      return current
   }
 
   render(){
@@ -35,3 +35,11 @@ export default class NowPlaying extends React.Component {
     else return null
   }
 }
+
+const mapStateToProps = function(store) {
+    return {
+        song: store.songManager,
+    };
+};
+
+export default connect(mapStateToProps)(NowPlaying);

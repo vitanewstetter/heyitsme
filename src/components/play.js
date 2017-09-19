@@ -1,26 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+
 import store from '../store';
 import Sound from '../js-css/sound-loader';
 import { context, buffer } from '../js-css/audio';
+
 //play and pause component
 class Play extends React.Component {
   //function contained in component that controls what
   //happens when you click on a play button
   playAudio(){
+
+
+
     console.log(this.props.id);
-    //send dispatch to the store telling it that we are
-    //playing a new song. if it's the same song, it will
-    //start where it left off.
-    store.dispatch({
-      type: 'NEW_SONG',
-      id: this.props.id
-    });
-    console.log(store.getState().songManager.song);
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
-    songPlaying();
+
+    if(this.props.feed){
+      axios.post('/api/current', {num: this.props.id}).then(function(response){
+          console.log(response.data[0])
+          var data = response.data[0]
+          store.dispatch({
+            type: 'NEW_SONG',
+            id: data._id,
+            title: data.title,
+            name: data.name
+          });
+          songPlaying();
+      })
+    }else{
+      store.dispatch({
+        type: 'NEW_SONG',
+        id: this.props.id,
+      });
+      songPlaying();
+    }
+
   }
   //function contained in component that controls what
   //happens when you click on a pause button
@@ -62,13 +80,14 @@ class Play extends React.Component {
 
 var current = new Sound(context, null, null);
 var songPlaying = function(){
-  console.log(store.getState().songManager.song);
   if (store.getState().songManager.playing){
     if (current.id !== store.getState().songManager.song){
       if(current.id !== null){
         current.stop();
       }
       current = new Sound(context, buffer.getSoundByIndex(store.getState().songManager.song), store.getState().songManager.song);
+
+      console.log("current is" + current)
       current.play();
     }
     else{

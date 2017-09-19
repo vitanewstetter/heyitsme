@@ -29,6 +29,7 @@ class MiniPlayer extends React.Component {
         circle="#FFFFFF"
         stroke="none"
         id={this.props.id}
+        feed={false}
       />
       <div id="mini-player-text">
         <h3>{ this.getInfo().name }</h3>

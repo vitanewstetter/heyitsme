@@ -13,7 +13,10 @@ const uploadData = (state = initialData, action) => {
         tags: action.tags,
       });
     case "CLEARDATA":
-      return Object.assign({}, state, {initialData});
+      return Object.assign({}, state, {
+        name: null,
+        description: null,
+        tags: [],});
     default:
       return state;
   }

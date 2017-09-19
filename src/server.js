@@ -141,6 +141,14 @@ app.get("/api/num", function(req, res){
   });
 });
 
+app.post("/api/current", function(req, res){
+  console.log(req.body.num)
+  db.collection('voicemails').find({_id : req.body.num}).toArray(function(err, docs) {
+      assert.equal(err, null);
+      return res.json(docs);
+  });
+});
+
 
 //voicemail loading part
 app.get("/api/voicemails", function(req, res){

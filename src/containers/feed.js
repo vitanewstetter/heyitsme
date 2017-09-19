@@ -27,8 +27,6 @@ class Feed extends React.Component {
           id = { data[i]._id }
           title = { data[i].title }
           name = { data[i].name }
-          time = { data[i].time }
-          date = { data[i].date }
         />)
       }
       this.setState({ feed: feed_items });

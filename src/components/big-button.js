@@ -51,17 +51,35 @@ class BigButton extends React.Component {
           ],
       })
 
+      var entriesFilled = true;
+      for (const key of Object.keys(store.getState().upload)) {
+          if (store.getState().upload[key]=== null || store.getState().upload[key]===''){
+            entriesFilled = false;
+          }
+      }
+      if (entriesFilled === true){
+        store.dispatch({
+          type: this.props.id
+        });
+      }else{
+        alert("please fill out all the fields");
+        console.log("not completed")
+      }
+
     }
     else if(this.props.complete){
+      axios.get('/api/num').then(function(response){
+        console.log("num is " + response.data);
+        store.dispatch({
+          type: "ADDVOICEMAIL",
+          num: response.data
+        })
+      })
         var num;
         axios.post('/complete', {
           file: store.getState().upload
         }).then(function (response) {
           console.log(response);
-          // store.dispatch({
-          //   type: "ADDVOICEMAIL",
-          //   num: response.data
-          // })
           axios.post('/', {
             num: response.data
           })
@@ -69,21 +87,22 @@ class BigButton extends React.Component {
           console.log(error);
         });
 
-    }
-    var entriesFilled = true;
-    for (const key of Object.keys(store.getState().upload)) {
-        if (store.getState().upload[key]=== null || store.getState().upload[key]===''){
-          entriesFilled = false;
-        }
-    }
-    if (entriesFilled === true){
+        console.log("clearing data")
+        store.dispatch({
+          type: "CLEARDATA",
+        })
+        console.log(store.getState().upload)
+
+        store.dispatch({
+          type: this.props.id
+        });
+
+    }else{
       store.dispatch({
         type: this.props.id
       });
-    }else{
-      alert("please fill out all the fields");
-      console.log("not completed")
     }
+
 
 
 
