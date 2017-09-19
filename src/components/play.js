@@ -19,7 +19,7 @@ class Play extends React.Component {
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
 
-    if(this.props.feed){
+    if(this.props.feed || this.props.sample){
       axios.post('/api/current', {num: this.props.id}).then(function(response){
           console.log(response.data[0])
           var data = response.data[0]
@@ -31,7 +31,8 @@ class Play extends React.Component {
           });
           songPlaying();
       })
-    }else{
+    }
+    else{
       store.dispatch({
         type: 'NEW_SONG',
         id: this.props.id,

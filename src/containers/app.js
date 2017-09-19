@@ -10,7 +10,6 @@ class App extends React.Component {
 
     componentWillMount(){
       axios.get('/api/num').then(function(response){
-        console.log("page loaded and num is " + response.data);
         store.dispatch({
           type: "ADDVOICEMAIL",
           num: response.data
@@ -20,7 +19,6 @@ class App extends React.Component {
 
     componentWillReceiveProps(){
       axios.get('/api/num').then(function(response){
-        console.log("page loaded and num is " + response.data);
         store.dispatch({
           type: "ADDVOICEMAIL",
           num: response.data

@@ -1,5 +1,6 @@
 const initialData = {
-  num: 1
+  num: 1,
+  needsUpdate: false
 }
 
 const uploadData = (state = initialData, action) => {
@@ -7,6 +8,14 @@ const uploadData = (state = initialData, action) => {
     case "ADDVOICEMAIL":
       return Object.assign({}, state, {
         num: action.num
+      });
+    case "NEEDSUPDATE":
+      return Object.assign({}, state, {
+        needsUpdate: true
+      });
+    case "UPDATED":
+      return Object.assign({}, state, {
+        needsUpdate: false
       });
     default:
       return state;

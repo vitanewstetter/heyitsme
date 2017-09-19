@@ -7,6 +7,19 @@ import SelectedTag from '../components/selected-tag';
 import store from '../store';
 
 class BrowseCriteria extends React.Component {
+
+  search(){
+    var searchVal = document.getElementById("tag-input").value;
+    var searching = document.getElementById("searching");
+    console.log(searchVal);
+
+    searching.innerHTML = "<p>" + searchVal + "</p>"
+    // store.dispatch({
+    //   type: 'ADD_TAG',
+    //   tag: searchVal
+    // })
+  }
+
   componentWillMount(){
     showTags();
   }
@@ -19,7 +32,7 @@ class BrowseCriteria extends React.Component {
       <NowPlaying
         id = {store.getState().songManager.song}
       />
-      <form>
+      <form >
         <input id="butt-dial" type="checkbox"/>
         <label>Butt Dial</label>
       </form>
@@ -27,9 +40,11 @@ class BrowseCriteria extends React.Component {
         <input id="drunk" type="checkbox"/>
         <label>Drunk Dial</label>
       </form>
-      <form>
-        <input id="tag-input" type="text" placeholder="search by tag"/>
+      <form id="tag-form">
+        <input onChange={this.search} id="tag-input" type="text" placeholder="search by tag"/>
       </form>
+      <div id="searching">
+      </div>
       <div id="selected-tags">
         { tagArray }
       </div>

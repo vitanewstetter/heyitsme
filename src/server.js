@@ -145,6 +145,8 @@ app.post("/api/current", function(req, res){
   console.log(req.body.num)
   db.collection('voicemails').find({_id : req.body.num}).toArray(function(err, docs) {
       assert.equal(err, null);
+      console.log(docs)
+      console.log(err)
       return res.json(docs);
   });
 });

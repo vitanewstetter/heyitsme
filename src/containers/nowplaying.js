@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import store from '../store';
 
 import Play from '../components/play';
-import voicemails from '../sample';
-
-
 
 class NowPlaying extends React.Component {
   getInfo(){

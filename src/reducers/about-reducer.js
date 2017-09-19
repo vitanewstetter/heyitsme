@@ -1,5 +1,5 @@
 const initialAbout = {
-  about: 'next'
+  about: 'about'
 }
 
 const about = (state = initialAbout, action) => {

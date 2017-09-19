@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import FeedItem from '../components/feed-item';
 
+import store from '../store';
+import { connect } from 'react-redux';
+
 class Feed extends React.Component {
 
   constructor(props) {
@@ -10,11 +13,11 @@ class Feed extends React.Component {
     this.state = {
       data: [],
       feed: [],
+      update: store.getState().update
     };
   }
 
   fillFeed(){
-    console.log("fillfeed called")
     axios.get(this.props.url).then(res => {
       this.setState({ data: res.data });
 
@@ -35,9 +38,13 @@ class Feed extends React.Component {
 
   componentDidMount(){
     this.fillFeed();
+    store.dispatch({
+      type: 'UPDATED'
+    })
   }
   componentWillReceiveProps(){
-    console.log("recieving props called")
+    console.log("recieving props called");
+    console.log(this.state.update)
     this.fillFeed();
   }
   render(){
@@ -47,4 +54,10 @@ class Feed extends React.Component {
   }
 }
 
-export default Feed
+const mapStateToProps = function(store) {
+    return {
+        update: store.num.needsUpdate
+    };
+};
+
+export default connect(mapStateToProps)(Feed);

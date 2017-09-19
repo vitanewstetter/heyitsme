@@ -87,17 +87,18 @@ class BigButton extends React.Component {
           console.log(error);
         });
 
-        console.log("clearing data")
-        store.dispatch({
-          type: "CLEARDATA",
-        })
-        console.log(store.getState().upload)
-
         store.dispatch({
           type: this.props.id
         });
+        store.dispatch({
+          type: 'NEEDSUPDATE'
+        });
 
-    }else{
+
+    }else if(this.props.id==='NEXT'){
+      store.dispatch({
+        type: 'CLEARDATA',
+      })
       store.dispatch({
         type: this.props.id
       });
@@ -127,7 +128,8 @@ const mapStateToProps = function(store) {
     return {
         about: store.about.about,
         uploadData: store.upload.uploadData,
-        num: store.num.num
+        num: store.num.num,
+        update: store.num.needsUpdate
     };
 };
 
