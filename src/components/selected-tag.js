@@ -20,11 +20,15 @@ class SelectedTag extends React.Component {
 
 var deleteTag = function(e){
   console.log('clicked x');
+
   store.dispatch({
     type: 'DELETE_TAG',
     id: e.props.tag,
-    index: e.props.index
-  })
+    index: e.props.index,
+  });
+  store.dispatch({
+    type: 'NEEDSUPDATE'
+  });
   console.log(store.getState().searchCriteria);
 }
 

@@ -8,10 +8,10 @@ import num from './voicemail-reducer';
 
 const reducers = combineReducers({
   songManager: songManager,
-  searchCriteria: searchCriteria,
+  search: searchCriteria,
   about: about,
   upload: upload,
-  num: num
+  num: num,
 })
 
 export default reducers;

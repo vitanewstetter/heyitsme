@@ -35,7 +35,7 @@ class App extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        num: store.num.num
+        num: store.num.num,
     };
 };
 

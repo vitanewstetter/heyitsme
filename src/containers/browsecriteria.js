@@ -5,6 +5,7 @@ import NowPlaying from './nowplaying';
 import SelectedTag from '../components/selected-tag';
 
 import store from '../store';
+import axios from 'axios';
 
 class BrowseCriteria extends React.Component {
 
@@ -13,11 +14,14 @@ class BrowseCriteria extends React.Component {
     var searching = document.getElementById("searching");
     console.log(searchVal);
 
-    searching.innerHTML = "<p>" + searchVal + "</p>"
-    // store.dispatch({
-    //   type: 'ADD_TAG',
-    //   tag: searchVal
-    // })
+    store.dispatch({
+      type: 'ADD_TAG',
+      tag: searchVal
+    })
+    store.dispatch({
+      type: 'NEEDSUPDATE'
+    });
+    document.getElementById("tag-input").value = "";
   }
 
   componentWillMount(){
@@ -41,7 +45,8 @@ class BrowseCriteria extends React.Component {
         <label>Drunk Dial</label>
       </form>
       <form id="tag-form">
-        <input onChange={this.search} id="tag-input" type="text" placeholder="search by tag"/>
+        <input id="tag-input" type="text" placeholder="search by tag"/>
+        <div onClick={this.search} id="searchAdd">Add Tag</div>
       </form>
       <div id="searching">
       </div>
@@ -55,10 +60,10 @@ class BrowseCriteria extends React.Component {
 var tagArray;
 var showTags = function(){
   tagArray = [];
-  for (var i=0; i < store.getState().searchCriteria.tags.length; i++){
+  for (var i=0; i < store.getState().search.tags.length; i++){
     tagArray.push(<SelectedTag
       key = { Math.random() }
-      tag = { store.getState().searchCriteria.tags[i] }
+      tag = { store.getState().search.tags[i] }
       index = { i }
     />)
   }
@@ -67,7 +72,7 @@ var showTags = function(){
 const mapStateToProps = function(store) {
     return {
         song: store.songManager.song,
-        tags: store.searchCriteria.tags,
+        tags: store.search.tags,
     };
 };
 

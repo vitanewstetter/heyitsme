@@ -39,10 +39,16 @@ MongoClient.connect(url, function(err, database) {
     assert.equal(null, err);
     db = database;
     console.log("Connected successfully to server");
-
+    db.collection('voicemails').createIndex(
+   {
+     title: "text",
+     name: "text",
+     tags: "text"
+   });
 });
 app.use(express.static("../build/"));
 app.use(bodyParser.json());
+
 
 //Access-Control-Allow-Origin stuff
 app.use(function(req, res, next) {
@@ -54,36 +60,6 @@ app.use(function(req, res, next) {
  //and remove cacheing so we get the most recent comments
  res.setHeader('Cache-Control', 'no-cache');
  next();
-});
-
-app.post("/complete", function(req, res){
-    console.log(req.method);
-    console.log(req.body);
-
-    var file = req.body.file;
-
-
-    db.collection('voicemails').count().then((count) => {
-      db.collection('voicemails').insert( {
-        _id: count,
-        title: file.description,
-        "name": file.name,
-        "date": "fuck",
-        "time": "ugh",
-        "tags": [
-          file.tags[0],
-          file.tags[1],
-          file.tags[2],
-          file.tags[3],
-          file.tags[4]
-        ],
-        "butt": false,
-        "drunk": false
-      });
-      return res.json(count);
-    });
-
-
 });
 
 app.post('/', function(req, res){
@@ -151,6 +127,33 @@ app.post("/api/current", function(req, res){
   });
 });
 
+app.post("/complete", function(req, res){
+    console.log(req.method);
+    console.log(req.body);
+
+    var file = req.body.file;
+
+
+    db.collection('voicemails').count().then((count) => {
+      db.collection('voicemails').insert( {
+        _id: count,
+        title: file.description,
+        "name": file.name,
+        "tags": [
+          file.tags[0],
+          file.tags[1],
+          file.tags[2],
+          file.tags[3],
+          file.tags[4]
+        ],
+        "butt": false,
+        "drunk": false
+      });
+      return res.json(count);
+    });
+
+
+});
 
 //voicemail loading part
 app.get("/api/voicemails", function(req, res){
@@ -167,7 +170,34 @@ app.get("/api/voicemails", function(req, res){
         });
 });
 
+app.post("/api/tags", function(req, res){
+  console.log(req.body.num);
+  console.log(req.body.tags);
+  var tags = req.body.tags.toString();
+  if (tags !== ""){
+    db.collection('voicemails').find({
+      $text: { $search: tags }
+    }, {score : { $meta: "textScore" } })
+      .toArray(function(err, results) {
+          if (err) {
+              res.send(err);
+          } else {
+              console.log(results)
+              res.json(results);
+          }
+      } );
+  }else{
+    db.collection('voicemails').find().toArray(function(err, results) {
+          if (err) {
+              res.send(err);
+          } else {
+              console.log(results)
+              res.json(results);
+          }
+      } );
+  }
 
+})
 
 httpServer.listen(8080, function(req, res){
     console.log("We are listening on port 8080!");

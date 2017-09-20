@@ -133,6 +133,7 @@ input, textarea:focus{
   margin-bottom: 2px;
   margin-top: 0;
   font-size: 20px;
+  text-transform: capitalize;
 }
 #mini-player-text p{
   margin-top: 8px;
@@ -278,6 +279,23 @@ input, textarea:focus{
   margin-left: 8px;
   width: 8px;
   height: 8px;
+  cursor: pointer;
+}
+#searchAdd{
+  line-height: 16px;
+  background-color: #606169;
+  color: white;
+  padding: 8px 12px;
+  font-family: p-semi;
+  border-radius: 8px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 11px;
+  cursor: pointer;
+}
+#searchAdd:hover{
+  opacity: 0.9;
 }
 
 #feed{
@@ -307,6 +325,7 @@ input, textarea:focus{
   font-family: p-semi, sans-serif;
   line-height: 22px;
   margin: 0;
+  text-transform: capitalize;
 }
 .feed-item h3{
   font-size: 11px;

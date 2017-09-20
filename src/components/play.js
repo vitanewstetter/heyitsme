@@ -5,22 +5,37 @@ import axios from 'axios';
 
 import store from '../store';
 import Sound from '../js-css/sound-loader';
-import { context, buffer } from '../js-css/audio';
+import { context } from '../js-css/audio';
+import Buffer from '../js-css/buffer-loader';
 
 //play and pause component
 class Play extends React.Component {
   //function contained in component that controls what
   //happens when you click on a play button
+  constructor(props) {
+    super(props);
+    this.state = {
+      buffer: new Buffer(context, store.getState().num.sounds)
+    };
+  }
+
+  loadSounds(){
+
+  }
+
+  componentDidMount(){
+    //this.state.buffer.loadAll();
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)
+  }
+
   playAudio(){
-
-
 
     console.log(this.props.id);
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
 
     if(this.props.feed || this.props.sample){
-      axios.post('/api/current', {num: this.props.id}).then(function(response){
+      axios.post('/api/current', {num: this.props.id}).then(response =>{
           console.log(response.data[0])
           var data = response.data[0]
           store.dispatch({
@@ -29,7 +44,7 @@ class Play extends React.Component {
             title: data.title,
             name: data.name
           });
-          songPlaying();
+          songPlaying(this);
       })
     }
     else{
@@ -37,7 +52,7 @@ class Play extends React.Component {
         type: 'NEW_SONG',
         id: this.props.id,
       });
-      songPlaying();
+      songPlaying(this);
     }
 
   }
@@ -48,7 +63,7 @@ class Play extends React.Component {
       type: 'PAUSE_SONG',
       id: this.id
     });
-    songPlaying();
+    songPlaying(this);
   }
   render(){
     if(store.getState().songManager.playing && store.getState().songManager.song === this.props.id){
@@ -80,15 +95,15 @@ class Play extends React.Component {
 }
 
 var current = new Sound(context, null, null);
-var songPlaying = function(){
+var songPlaying = function(e){
   if (store.getState().songManager.playing){
     if (current.id !== store.getState().songManager.song){
       if(current.id !== null){
         current.stop();
       }
-      current = new Sound(context, buffer.getSoundByIndex(store.getState().songManager.song), store.getState().songManager.song);
-
-      console.log("current is" + current)
+      var buffer = e.state.buffer;
+      var song = store.getState().songManager.song;
+      current = new Sound(context, buffer.getSoundByIndex(song), song);
       current.play();
     }
     else{

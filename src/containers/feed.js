@@ -18,7 +18,17 @@ class Feed extends React.Component {
   }
 
   fillFeed(){
-    axios.get(this.props.url).then(res => {
+    // axios.post('/api/tags', {
+    //   num: store.getState().search.tags.length,
+    //   tags: store.getState().search.tags
+    // }).then(function(response){
+    //   console.log(response)
+    // })
+    console.log("fill feed called")
+    axios.post('/api/tags', {
+        num: store.getState().search.tags.length,
+        tags: store.getState().search.tags
+    }).then(res => {
       this.setState({ data: res.data });
 
       var data = this.state.data;
@@ -33,6 +43,7 @@ class Feed extends React.Component {
         />)
       }
       this.setState({ feed: feed_items });
+
     });
   }
 
@@ -46,6 +57,9 @@ class Feed extends React.Component {
     console.log("recieving props called");
     console.log(this.state.update)
     this.fillFeed();
+    store.dispatch({
+      type: 'UPDATED'
+    })
   }
   render(){
     return <div id='feed'>

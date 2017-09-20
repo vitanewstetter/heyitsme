@@ -1,9 +1,11 @@
 const initialData = {
-  num: 1,
-  needsUpdate: false
+  num: 0,
+  needsUpdate: false,
+  sounds: [],
+  buffer: null
 }
 
-const uploadData = (state = initialData, action) => {
+const GeneralInfo = (state = initialData, action) => {
   switch(action.type){
     case "ADDVOICEMAIL":
       return Object.assign({}, state, {
@@ -17,9 +19,13 @@ const uploadData = (state = initialData, action) => {
       return Object.assign({}, state, {
         needsUpdate: false
       });
+    case "LOADSOUNDS":
+      return Object.assign({}, state, {
+        sounds: action.sounds
+      });
     default:
       return state;
   }
 }
 
-export default uploadData;
+export default GeneralInfo;
