@@ -1,4 +1,4 @@
-var taglist = ["funny", "mom"];
+var taglist = [];
 
 const initialSearch = {
   tags: taglist
