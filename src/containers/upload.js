@@ -20,6 +20,7 @@ class Upload extends React.Component{
     <MiniPlayer
       id={store.getState().num.num}
       current='true'
+      sample={false}
     />
 
     <BigButton

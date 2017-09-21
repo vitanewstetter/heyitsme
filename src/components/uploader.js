@@ -14,8 +14,6 @@ class Uploader extends React.Component {
   handleFileUpload(){
     var socket = SocketIO('http://localhost:8080');
     var uploader = new SocketIOFileClient(socket);
-    var form = document.getElementById('uploader-form');
-
 
     uploader.on('start', function(fileInfo) {
         console.log('Start uploading', fileInfo);
@@ -25,6 +23,9 @@ class Uploader extends React.Component {
     });
     uploader.on('complete', function(fileInfo) {
         console.log('Upload Complete', fileInfo);
+        store.dispatch({
+          type: "NEEDSUPDATE"
+        })
     });
     uploader.on('error', function(err) {
         console.log('Error!', err);

@@ -26,6 +26,9 @@ class Play extends React.Component {
   componentDidMount(){
     //this.state.buffer.loadAll();
     this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)
+    store.dispatch({
+      type: "NEEDSUPDATE"
+    })
   }
 
   playAudio(){
@@ -33,7 +36,7 @@ class Play extends React.Component {
     console.log(this.props.id);
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
-
+    console.log(this.props.feed + "and" + this.props.sample);
     if(this.props.feed || this.props.sample){
       axios.post('/api/current', {num: this.props.id}).then(response =>{
           console.log(response.data[0])
@@ -51,6 +54,8 @@ class Play extends React.Component {
       store.dispatch({
         type: 'NEW_SONG',
         id: this.props.id,
+        title: store.getState().upload.description,
+        name: store.getState().upload.name
       });
       songPlaying(this);
     }
@@ -96,6 +101,7 @@ class Play extends React.Component {
 
 var current = new Sound(context, null, null);
 var songPlaying = function(e){
+  e.state.buffer.loadSound("/voicemails/vm_" + e.props.id + ".m4a", e.props.id)
   if (store.getState().songManager.playing){
     if (current.id !== store.getState().songManager.song){
       if(current.id !== null){
@@ -119,6 +125,7 @@ const mapStateToProps = function(store) {
     return {
         playing: store.songManager.playing,
         song: store.songManager.song,
+        upload: store.upload.uploadData
     };
 };
 

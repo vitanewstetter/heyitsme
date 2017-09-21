@@ -14,7 +14,8 @@ class MiniPlayer extends React.Component {
     super(props);
     this.state = {
         name: '',
-        title: ''
+        title: '',
+        update: store.getState().update
     };
 
 
@@ -25,10 +26,10 @@ class MiniPlayer extends React.Component {
   //   console.log(this.state)
   // }
 
-  componentDidMount(){
-    this.getInfo();
-    console.log(this.state)
-  }
+  // componentDidMount(){
+  //   this.getInfo();
+  //   console.log(this.state)
+  // }
 
   componentWillReceiveProps(){
     this.getInfo();
@@ -46,6 +47,7 @@ class MiniPlayer extends React.Component {
 
       //var data;
       axios.post('/api/current', {num: this.props.id}).then((response) => {
+        console.log(response)
           this.setState({
             name: response.data[0].name,
             title: response.data[0].title
@@ -62,7 +64,7 @@ class MiniPlayer extends React.Component {
         circle="#FFFFFF"
         stroke="none"
         id={this.props.id}
-        sample={true}
+        sample={this.props.sample}
       />
       <div id="mini-player-text">
         <h3>{ this.state.name }</h3>
@@ -74,7 +76,8 @@ class MiniPlayer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        uploadData: store.upload.uploadData
+        uploadData: store.upload.uploadData,
+        update: store.num.needsUpdate
     };
 };
 

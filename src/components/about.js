@@ -23,6 +23,7 @@ class About extends React.Component {
         <div className="about-rule"></div>
         <MiniPlayer
           id={1}
+          sample={true}
         />
         <p id="about-body">Whether it’s a 5-minute butt dial message, a song for your birthday, or a tearful goodbye, voicemail has it’s own special language.
 

@@ -50,6 +50,7 @@ class BigButton extends React.Component {
             tag5
           ],
       })
+      console.log(store.getState().upload)
 
       var entriesFilled = true;
       for (const key of Object.keys(store.getState().upload)) {
@@ -65,6 +66,10 @@ class BigButton extends React.Component {
         alert("please fill out all the fields");
         console.log("not completed")
       }
+
+      store.dispatch({
+        type: "NEEDSUPDATE"
+      })
 
     }
     else if(this.props.complete){

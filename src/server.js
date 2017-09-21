@@ -47,6 +47,7 @@ MongoClient.connect(url, function(err, database) {
    });
 });
 app.use(express.static("../build/"));
+app.use(express.static("../public/"));
 app.use(bodyParser.json());
 
 
@@ -71,8 +72,9 @@ app.post('/', function(req, res){
 io.on('connection', (socket) => {
 	console.log('Socket connected.');
 
-	var count = 0;
+	console.log("at socket, db entries is: "+ dbEntries);
 	var uploader = new SocketIOFile(socket, {
+
 		// uploadDir: {			// multiple directories
 		// 	music: 'data/music',
 		// 	document: 'data/document'
@@ -118,10 +120,9 @@ app.get("/api/num", function(req, res){
 });
 
 app.post("/api/current", function(req, res){
-  console.log(req.body.num)
+  console.log("current " + req.body.num)
   db.collection('voicemails').find({_id : req.body.num}).toArray(function(err, docs) {
       assert.equal(err, null);
-      console.log(docs)
       console.log(err)
       return res.json(docs);
   });
@@ -173,6 +174,8 @@ app.get("/api/voicemails", function(req, res){
 app.post("/api/tags", function(req, res){
   console.log(req.body.num);
   console.log(req.body.tags);
+  dbEntries = req.body.num;
+  console.log("db entries is " + dbEntries);
   var tags = req.body.tags.toString();
   if (tags !== ""){
     db.collection('voicemails').find({
@@ -182,7 +185,7 @@ app.post("/api/tags", function(req, res){
           if (err) {
               res.send(err);
           } else {
-              console.log(results)
+              //console.log(results)
               res.json(results);
           }
       } );
@@ -191,7 +194,6 @@ app.post("/api/tags", function(req, res){
           if (err) {
               res.send(err);
           } else {
-              console.log(results)
               res.json(results);
           }
       } );
