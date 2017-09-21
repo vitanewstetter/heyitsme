@@ -16,7 +16,7 @@ var port = process.env.PORT || 8080;
 
 app.set('view engine', 'html');
 
-var url = "mongodb://165.227.210.187:27017",
+var url = "mongodb://127.0.0.1:27017",
     db;
 
 var findDocuments = function(db, callback) {
