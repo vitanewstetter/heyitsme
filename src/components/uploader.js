@@ -12,7 +12,7 @@ var SocketIOFileClient = require('socket.io-file-client');
 
 class Uploader extends React.Component {
   handleFileUpload(){
-    var socket = SocketIO('http://localhost:8080');
+    var socket = SocketIO('45.55.186.32');
     var uploader = new SocketIOFileClient(socket);
 
     uploader.on('start', function(fileInfo) {
