@@ -3,7 +3,6 @@
 var express = require('express'),
     assert = require('assert'),
     fs = require('fs'),
-    cors = require("cors"),
     app = express(),
     MongoClient = require("mongodb").MongoClient,
     http = require('http'),
