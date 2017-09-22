@@ -171,10 +171,7 @@ app.get("/api/voicemails", function(req, res){
 });
 
 app.post("/api/tags", function(req, res){
-  console.log(req.body.num);
-  console.log(req.body.tags);
   dbEntries = req.body.num;
-  console.log("db entries is " + dbEntries);
   var tags = req.body.tags.toString();
   if (tags !== ""){
     db.collection('voicemails').find({
@@ -184,7 +181,6 @@ app.post("/api/tags", function(req, res){
           if (err) {
               res.send(err);
           } else {
-              //console.log(results)
               res.json(results);
           }
       } );

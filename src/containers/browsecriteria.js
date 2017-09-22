@@ -8,6 +8,13 @@ import store from '../store';
 import axios from 'axios';
 
 class BrowseCriteria extends React.Component {
+  returnFalse(e){
+      var char = e.which || e.keyCode;
+      if(char === 13){
+        e.preventDefault();
+      }
+
+  }
 
   search(){
     var searchVal = document.getElementById("tag-input").value;
@@ -47,7 +54,7 @@ class BrowseCriteria extends React.Component {
         <label>Drunk Dial</label>
       </form>
       <form id="tag-form">
-        <input id="tag-input" type="text" placeholder="search by tag"/>
+        <input id="tag-input" type="text" placeholder="search by tag" onKeyDown={(e) => this.returnFalse(e)}/>
         <div onClick={this.search} id="searchAdd">Add Tag</div>
       </form>
       <div id="searching">
@@ -70,6 +77,7 @@ var showTags = function(){
     />)
   }
 }
+
 
 const mapStateToProps = function(store) {
     return {
