@@ -12,6 +12,7 @@ class BrowseCriteria extends React.Component {
       var char = e.which || e.keyCode;
       if(char === 13){
         e.preventDefault();
+        this.search();
       }
 
   }
