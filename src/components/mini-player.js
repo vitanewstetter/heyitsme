@@ -45,15 +45,17 @@ class MiniPlayer extends React.Component {
         });
       }
 
-      //var data;
-      axios.post('/api/current', {num: this.props.id}).then((response) => {
-        console.log(response)
-          this.setState({
-            name: response.data[0].name,
-            title: response.data[0].title
-          });
+      else{
+        axios.post('/api/current', {num: this.props.id}).then((response) => {
+          console.log(response)
+            this.setState({
+              name: response.data[0].name,
+              title: response.data[0].title
+            });
 
-        });
+          });
+      }//var data;
+
       //return data;
   }
 
