@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
 			var fname = "vm";	// filename without extension
 			var ext = split[1];
 
-			return `${fname}_${dbEntries+=1}.${ext}`;
+			return `${fname}_${dbEntries}.${ext}`;
 		}
 	});
 	uploader.on('start', (fileInfo) => {
