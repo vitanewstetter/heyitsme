@@ -35,7 +35,7 @@ class Uploader extends React.Component {
     });
 
     var UploadButton = document.getElementById("UPLOAD");
-    
+
     UploadButton.onclick = function(ev) {
         console.log("clicked!");
         ev.preventDefault();
@@ -49,7 +49,7 @@ class Uploader extends React.Component {
 
   render(){
     return <form id='uploader-form'>
-      <input onChange={this.handleFileUpload} type="file" id="fileInput" required accept=".wav,.aif,.aiff,.flac,.alac,.aac,.ogg,.mp3"/>
+      <input onChange={this.handleFileUpload} type="file" id="fileInput" required/>
       <label htmlFor="fileInput">Select a file</label>
     </form>
   }
