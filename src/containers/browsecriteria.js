@@ -13,15 +13,17 @@ class BrowseCriteria extends React.Component {
     var searchVal = document.getElementById("tag-input").value;
     var searching = document.getElementById("searching");
     console.log(searchVal);
+    if (searchVal !== '' && searchVal !== ' '){
+      store.dispatch({
+        type: 'ADD_TAG',
+        tag: searchVal
+      })
+      store.dispatch({
+        type: 'NEEDSUPDATE'
+      });
+      document.getElementById("tag-input").value = "";
+    }
 
-    store.dispatch({
-      type: 'ADD_TAG',
-      tag: searchVal
-    })
-    store.dispatch({
-      type: 'NEEDSUPDATE'
-    });
-    document.getElementById("tag-input").value = "";
   }
 
   componentWillMount(){
