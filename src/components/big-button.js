@@ -13,7 +13,7 @@ class BigButton extends React.Component {
     var completed;
     if (this.props.upload){
       axios.get('/api/num').then(function(response){
-        console.log("num is " + response.data);
+        //console.log("num is " + response.data);
         store.dispatch({
           type: "ADDVOICEMAIL",
           num: response.data
@@ -50,7 +50,7 @@ class BigButton extends React.Component {
             tag5
           ],
       })
-      console.log(store.getState().upload)
+      //console.log(store.getState().upload)
 
       var entriesFilled = true;
       for (const key of Object.keys(store.getState().upload)) {
@@ -63,7 +63,7 @@ class BigButton extends React.Component {
           type: this.props.id
         });
       }else{
-        alert("please fill out all the fields");
+        alert("Please fill out all the required fields");
         console.log("not completed")
       }
 
@@ -84,7 +84,7 @@ class BigButton extends React.Component {
         axios.post('/complete', {
           file: store.getState().upload
         }).then(function (response) {
-          console.log(response);
+          //console.log(response);
           axios.post('/', {
             num: response.data
           })

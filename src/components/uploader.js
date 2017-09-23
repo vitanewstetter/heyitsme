@@ -16,15 +16,18 @@ class Uploader extends React.Component {
     var uploader = new SocketIOFileClient(socket);
 
     uploader.on('start', function(fileInfo) {
-        console.log('Start uploading', fileInfo);
+        //console.log('Start uploading', fileInfo);
     });
     uploader.on('stream', function(fileInfo) {
-        console.log('Streaming... sent ' + fileInfo.sent + ' bytes.');
+        //console.log('Streaming... sent ' + fileInfo.sent + ' bytes.');
     });
     uploader.on('complete', function(fileInfo) {
         console.log('Upload Complete', fileInfo);
         store.dispatch({
           type: "NEEDSUPDATE"
+        })
+        store.dispatch({
+          type: "NEWSOUND"
         })
     });
     uploader.on('error', function(err) {
@@ -37,7 +40,7 @@ class Uploader extends React.Component {
     var UploadButton = document.getElementById("UPLOAD");
 
     UploadButton.onclick = function(ev) {
-        console.log("clicked!");
+        //console.log("clicked!");
         ev.preventDefault();
 
         var fileEl = document.getElementById('fileInput');

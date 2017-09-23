@@ -15,7 +15,8 @@ class Play extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      buffer: new Buffer(context, store.getState().num.sounds)
+      buffer: new Buffer(context, store.getState().num.sounds),
+      soundDone: store.getState().load
     };
   }
 
@@ -28,6 +29,13 @@ class Play extends React.Component {
     this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)
     store.dispatch({
       type: "NEEDSUPDATE"
+    })
+  }
+
+  componentWillReceiveProps(){
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)
+    store.dispatch({
+      type: "SOUNDDONE"
     })
   }
 
@@ -125,7 +133,8 @@ const mapStateToProps = function(store) {
     return {
         playing: store.songManager.playing,
         song: store.songManager.song,
-        upload: store.upload.uploadData
+        upload: store.upload.uploadData,
+        load: store.num.loadSound
     };
 };
 
