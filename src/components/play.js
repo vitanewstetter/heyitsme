@@ -56,6 +56,7 @@ class Play extends React.Component {
       })
     }
     else{
+      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a";
       store.dispatch({
         type: 'NEW_SONG',
         id: this.props.id,
