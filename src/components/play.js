@@ -20,9 +20,10 @@ class Play extends React.Component {
     };
   }
 
-  loadSounds(){
-
-  }
+  loadSound() = () => new Promise((resolve, reject) =>{
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+    console.log('did promise');
+  })
 
   componentDidMount(){
     //this.state.buffer.loadAll();
@@ -33,7 +34,7 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+    // this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
   }
 
   playAudio(){
@@ -56,14 +57,15 @@ class Play extends React.Component {
       })
     }
     else{
-      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
-      store.dispatch({
-        type: 'NEW_SONG',
-        id: this.props.id,
-        title: store.getState().upload.description,
-        name: store.getState().upload.name
-      });
-      songPlaying(this);
+      this.loadSound().then(() => {
+        store.dispatch({
+          type: 'NEW_SONG',
+          id: this.props.id,
+          title: store.getState().upload.description,
+          name: store.getState().upload.name
+        });
+        songPlaying(this);
+      })
     }
 
   }
