@@ -26,9 +26,6 @@ class Uploader extends React.Component {
         store.dispatch({
           type: "NEEDSUPDATE"
         })
-        store.dispatch({
-          type: "NEWSOUND"
-        })
     });
     uploader.on('error', function(err) {
         console.log('Error!', err);
