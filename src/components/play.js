@@ -33,7 +33,7 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-    // this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
   }
 
   playAudio(){
