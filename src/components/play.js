@@ -20,14 +20,17 @@ class Play extends React.Component {
     };
   }
 
-  loadSound = new Promise((resolve, reject) =>{
-    if(this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)){
-      resolve("loaded that file!")
-    }
-    else{
-      reject(Error("error"));
-    }
-  })
+  loadSound(instance){
+    return new Promise((resolve, reject) =>{
+      console.log(instance);
+      if(instance.state.buffer.loadSound("/voicemails/vm_" + instance.props.id + ".m4a", instance.props.id)){
+        resolve("loaded that file!")
+      }
+      else{
+        reject(Error("error"));
+      }
+    })
+  }
 
   componentDidMount(){
     //this.state.buffer.loadAll();
@@ -61,7 +64,7 @@ class Play extends React.Component {
       })
     }
     else{
-      this.loadSound.then(function(result){
+      this.loadSound(this).then(function(result){
         console.log(result);
         store.dispatch({
           type: 'NEW_SONG',
