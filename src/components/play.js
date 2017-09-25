@@ -22,14 +22,7 @@ class Play extends React.Component {
 
   loadSounds(){
     console.log("load sounds called");
-    if(this.state.buffer.urls[this.props.id]){
-      console.log('already have it')
-    }
-    else{
-      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
-      console.log("loaded number " + this.props.id + " into buffer");
-      console.log(this.state.buffer);
-    }
+
 
   }
 
@@ -42,7 +35,14 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-      this.loadSounds();
+    if(this.state.buffer.urls[this.props.id]){
+      console.log('already have it')
+    }
+    else{
+      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+      console.log("loaded number " + this.props.id + " into buffer");
+      //console.log(this.state.buffer);
+    }
       console.log(this.state.buffer)
   }
 
