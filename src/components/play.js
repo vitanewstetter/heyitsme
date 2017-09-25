@@ -21,7 +21,15 @@ class Play extends React.Component {
   }
 
   loadSounds(){
-    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+    if(this.state.buffer.urls[this.props.id]){
+      console.log('already have it')
+    }
+    else{
+      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+      console.log("loaded number " + this.props.id + " into buffer");
+      console.log(this.state.buffer);
+    }
+
   }
 
   componentDidMount(){
@@ -34,7 +42,7 @@ class Play extends React.Component {
 
   componentWillReceiveProps(){
       this.loadSounds
-      console.log("loaded that sound!")
+      console.log(this.state.buffer)
   }
 
   playAudio(){
@@ -107,7 +115,7 @@ class Play extends React.Component {
 
 var current = new Sound(context, null, null);
 var songPlaying = function(e){
-  e.state.buffer.loadSound("/voicemails/vm_" + e.props.id + ".m4a", e.props.id)
+  // e.state.buffer.loadSound("/voicemails/vm_" + e.props.id + ".m4a", e.props.id)
   if (store.getState().songManager.playing){
     if (current.id !== store.getState().songManager.song){
       if(current.id !== null){
