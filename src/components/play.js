@@ -23,7 +23,8 @@ class Play extends React.Component {
   loadSound(instance){
     return new Promise((resolve, reject) =>{
       console.log(instance);
-      if(instance.state.buffer.loadSound("/voicemails/vm_" + instance.props.id + ".m4a", instance.props.id)){
+      instance.state.buffer.loadSound("/voicemails/vm_" + instance.props.id + ".m4a", instance.props.id)
+      if(instance.state.buffer.urls[instance.props.id]){
         resolve("loaded that file!")
       }
       else{
