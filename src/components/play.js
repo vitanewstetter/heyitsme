@@ -8,7 +8,6 @@ import Sound from '../js-css/sound-loader';
 import { context } from '../js-css/audio';
 import Buffer from '../js-css/buffer-loader';
 
-var temp = true;
 //play and pause component
 class Play extends React.Component {
   //function contained in component that controls what
@@ -17,23 +16,12 @@ class Play extends React.Component {
     super(props);
     this.state = {
       buffer: new Buffer(context, store.getState().num.sounds),
-      soundDone: store.getState().update
+      soundDone: store.getState().num.update
     };
   }
 
-  loadSound(instance){
-    return new Promise((resolve, reject) =>{
-      console.log(instance);
-      console.log(instance.state.buffer.urls);
-      instance.state.buffer.loadSound("/voicemails/vm_" + instance.props.id + ".m4a", instance.props.id)
-      console.log(instance);
-      if(temp){
-        resolve("loaded that file!")
-      }
-      else{
-        reject(Error("error"));
-      }
-    })
+  loadSounds(){
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
   }
 
   componentDidMount(){
@@ -45,12 +33,13 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-    // this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+      this.loadSounds
+      console.log("loaded that sound!")
   }
 
   playAudio(){
 
-    console.log("play audio called");
+    console.log(this.props.id);
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
     console.log(this.props.feed + "and" + this.props.sample);
@@ -68,16 +57,14 @@ class Play extends React.Component {
       })
     }
     else{
-      this.loadSound(this).then(function(result){
-        console.log(result);
-        store.dispatch({
-          type: 'NEW_SONG',
-          id: this.props.id,
-          title: store.getState().upload.description,
-          name: store.getState().upload.name
-        });
-        songPlaying(this);
-      })
+      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a";
+      store.dispatch({
+        type: 'NEW_SONG',
+        id: this.props.id,
+        title: store.getState().upload.description,
+        name: store.getState().upload.name
+      });
+      songPlaying(this);
     }
 
   }
