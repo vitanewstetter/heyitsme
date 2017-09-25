@@ -34,22 +34,23 @@ class Play extends React.Component {
     })
   }
 
-  componentWillReceiveProps(){
-    if(this.state.buffer.buffer[this.props.id]){
-      console.log(this.state.buffer.buffer[this.props.id]);
-      console.log('already have it')
-    }
-    else{
-      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
-      console.log("loaded number " + this.props.id + " into buffer");
-      //console.log(this.state.buffer);
-    }
-      console.log(this.state.buffer)
-  }
+  // componentWillReceiveProps(){
+  //   if(this.state.buffer.buffer[this.props.id]){
+  //     console.log(this.state.buffer.buffer[this.props.id]);
+  //     console.log('already have it')
+  //   }
+  //   else{
+  //     this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+  //     console.log("loaded number " + this.props.id + " into buffer");
+  //     //console.log(this.state.buffer);
+  //   }
+  //     console.log(this.state.buffer)
+  // }
 
   playAudio(){
 
     console.log(this.props.id);
+
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
     console.log(this.props.feed + "and" + this.props.sample);
@@ -67,6 +68,8 @@ class Play extends React.Component {
       })
     }
     else{
+      this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id)
+      console.log(this.state.buffer)
       store.dispatch({
         type: 'NEW_SONG',
         id: this.props.id,
