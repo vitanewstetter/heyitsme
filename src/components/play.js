@@ -35,7 +35,8 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-    if(this.state.buffer.urls[this.props.id]){
+    if(this.state.buffer.buffer[this.props.id]){
+      console.log(this.state.buffer.buffer[this.props.id]);
       console.log('already have it')
     }
     else{
