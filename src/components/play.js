@@ -8,6 +8,7 @@ import Sound from '../js-css/sound-loader';
 import { context } from '../js-css/audio';
 import Buffer from '../js-css/buffer-loader';
 
+var temp = true;
 //play and pause component
 class Play extends React.Component {
   //function contained in component that controls what
@@ -26,7 +27,7 @@ class Play extends React.Component {
       console.log(instance.state.buffer.urls);
       instance.state.buffer.loadSound("/voicemails/vm_" + instance.props.id + ".m4a", instance.props.id)
       console.log(instance);
-      if(1===1){
+      if(temp){
         resolve("loaded that file!")
       }
       else{
