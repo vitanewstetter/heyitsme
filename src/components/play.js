@@ -21,6 +21,7 @@ class Play extends React.Component {
   }
 
   loadSounds(){
+    console.log("load sounds called");
     if(this.state.buffer.urls[this.props.id]){
       console.log('already have it')
     }
@@ -41,7 +42,7 @@ class Play extends React.Component {
   }
 
   componentWillReceiveProps(){
-      this.loadSounds
+      this.loadSounds();
       console.log(this.state.buffer)
   }
 
