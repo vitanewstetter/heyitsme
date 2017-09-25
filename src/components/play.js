@@ -43,7 +43,7 @@ class Play extends React.Component {
 
   playAudio(){
 
-    console.log(this.props.id);
+    console.log("play audio called");
     //then call the song playing function, which checks
     //the playing status and either plays or pauses.
     console.log(this.props.feed + "and" + this.props.sample);
