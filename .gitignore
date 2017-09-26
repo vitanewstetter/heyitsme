@@ -9,6 +9,8 @@
 # production
 /build
 
+#actual files of voicemails?
+
 # misc
 .DS_Store
 .env.local

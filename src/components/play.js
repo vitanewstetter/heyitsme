@@ -34,18 +34,10 @@ class Play extends React.Component {
     })
   }
 
-  // componentWillReceiveProps(){
-  //   if(this.state.buffer.buffer[this.props.id]){
-  //     console.log(this.state.buffer.buffer[this.props.id]);
-  //     console.log('already have it')
-  //   }
-  //   else{
-  //     this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
-  //     console.log("loaded number " + this.props.id + " into buffer");
-  //     //console.log(this.state.buffer);
-  //   }
-  //     console.log(this.state.buffer)
-  // }
+  componentWillReceiveProps(){
+    this.state.buffer.loadSound("/voicemails/vm_" + this.props.id + ".m4a", this.props.id);
+    console.log(this.state.buffer)
+  }
 
   playAudio(){
 
