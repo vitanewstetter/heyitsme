@@ -196,6 +196,12 @@ input, textarea:focus{
 #fileInput + label:hover {
     background-color: #518ED6;
 }
+#uploader-form p{
+  color: white;
+  display: inline-block;
+  margin-left: 24px;
+  width: 200px;
+}
 
 .upload-body-text{
   color: white;

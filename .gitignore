@@ -10,6 +10,7 @@
 /build
 
 #actual files of voicemails?
+/public
 
 # misc
 .DS_Store
