@@ -9,29 +9,28 @@ var SocketIOFileClient = require('socket.io-file-client');
 
 
 
-
 class Uploader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: 'hi',
+      file: '',
     };
   }
 
   fileName(){
-    var file = document.getElementById('fileInput');
-    console.log(file.value)
-    this.setState({ file: "new" });
+    var file = document.getElementById('fileInput').files[0].name;
+    this.setState({ file: file });
   }
 
-  handleFileUpload(){
+  handleFileUpload(e){
+    e.fileName();
+
     var socket = SocketIO();
     var uploader = new SocketIOFileClient(socket);
 
 
     uploader.on('start', function(fileInfo) {
         //console.log('Start uploading', fileInfo);
-        this.fileName();
     });
     uploader.on('stream', function(fileInfo) {
         //console.log('Streaming... sent ' + fileInfo.sent + ' bytes.');
@@ -52,7 +51,7 @@ class Uploader extends React.Component {
     var UploadButton = document.getElementById("UPLOAD");
 
     UploadButton.onclick = function(ev) {
-        //console.log("clicked!");
+        console.log("clicked!");
         ev.preventDefault();
 
         var fileEl = document.getElementById('fileInput');
@@ -64,7 +63,7 @@ class Uploader extends React.Component {
 
   render(){
     return <form id='uploader-form'>
-      <input onChange={this.handleFileUpload} type="file" id="fileInput" required/>
+      <input onChange={(e) => this.handleFileUpload(this)} type="file" id="fileInput" required/>
       <label htmlFor="fileInput">Select a file</label>
       <p>{this.state.file}</p>
     </form>

@@ -387,3 +387,18 @@ input, textarea:focus{
 .little-button p{
   margin: 0;
 }
+
+select{
+  border: 0;
+  padding: 4px;
+  margin: 0px 8px;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border-bottom: 2px solid #518ED6;
+  color: white;
+  transition: all .4s ease-in-out;
+  background-color: transparent;
+  font-family: p-reg;
+}

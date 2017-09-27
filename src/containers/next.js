@@ -22,6 +22,27 @@ class Next extends React.Component{
         <input required placeholder= {store.getState().upload.tags[3]} className="upload-text-input narrow-input" id="upload-tag-four" type="text" maxLength="13"/>,
         and
         <input required placeholder= {store.getState().upload.tags[4]} className="upload-text-input narrow-input" id="upload-tag-five" type="text" maxLength="13"/>.
+         It was
+        <select id="upload-birthday">
+          <option value={false}>not related</option>
+          <option value={true}>related</option>
+        </select>
+        to my birthday, they
+        <select id="upload-drunk">
+          <option value={false}>were not</option>
+          <option value={true}>were</option>
+        </select>
+        probably intoxicated, it
+        <select id="upload-automated">
+          <option value={false}>was not</option>
+          <option value={true}>was</option>
+        </select>
+        left by an automated machine, and i have to admit it is
+        <select id="upload-butt">
+          <option value={false}>not</option>
+          <option value={true}>definitely</option>
+        </select>
+        a butt dial.
         <br/>
         </p>
 

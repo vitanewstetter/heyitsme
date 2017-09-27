@@ -2,6 +2,10 @@ const initialData = {
   name: null,
   description: null,
   tags: [],
+  drunk: false,
+  birthday: false,
+  automated: false,
+  butt: false
 }
 
 const uploadData = (state = initialData, action) => {
