@@ -39,7 +39,10 @@ class Uploader extends React.Component {
         console.log('Upload Complete', fileInfo);
         store.dispatch({
           type: "NEEDSUPDATE"
-        })
+        });
+        store.dispatch({
+          type: 'UPLOAD'
+        });
     });
     uploader.on('error', function(err) {
         console.log('Error!', err);

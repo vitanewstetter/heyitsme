@@ -59,9 +59,9 @@ class BigButton extends React.Component {
           }
       }
       if (entriesFilled === true){
-        store.dispatch({
-          type: this.props.id
-        });
+        // store.dispatch({
+        //   type: this.props.id
+        // });
       }else{
         alert("Please fill out all the required fields");
         console.log("not completed")
